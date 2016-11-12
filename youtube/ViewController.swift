@@ -62,15 +62,55 @@ class VideoCell: UICollectionViewCell {
         return imageView
     }()
     
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.purple
+        // this label will not use the addConstraintsWithFormat
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let subtitleTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = UIColor.orange
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
+    
     func setupViews() {
         addSubview(thumbnailImageView)
         addSubview(separatorView)
+        addSubview(userProfileImageView)
+        addSubview(titleLabel)
+        addSubview(subtitleTextView)
         
         addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
+        addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
         
-        addConstraintsWithFormat(format: "V:|-16-[v0]-16-[v1(1)]|", views: thumbnailImageView, separatorView)
+        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
         
+        // this means, titleLabel is underneath of thumbnailImageView by 8 pixels.. and it's 20 px height
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
+        
+        // this means, titleLabel is 8 pixels on the right side of userProfileImageView
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        
+        
+        // For subtitleTextView
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
+        
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+
+
     }
     
     override init(frame: CGRect) {
