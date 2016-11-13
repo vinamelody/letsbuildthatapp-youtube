@@ -33,7 +33,13 @@ class HomeController: UICollectionViewController {
 extension HomeController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        
+        // estimate the total height of entire cell. but this alone will squeeze the thumbnail image, therefore we add with some numbers below
+        let height = (view.frame.width - 16 - 16) * 9 / 16
+        
+        // the + 16 is from the top g ap
+        // + 68 is from the vertical constraints: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|" --> 8 + 44 + 16, ignore the 1
+        return CGSize(width: view.frame.width, height: height + 16 + 68)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -55,7 +61,7 @@ class VideoCell: UICollectionViewCell {
     
     let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.blue
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         return view
     }()
     
