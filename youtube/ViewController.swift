@@ -15,6 +15,14 @@ class HomeController: UICollectionViewController {
         
         collectionView?.backgroundColor = UIColor.white
         navigationItem.title = "Home"
+        navigationController?.navigationBar.isTranslucent = false
+        
+        // 32 is for the left spacing
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
+        titleLabel.text = "Home"
+        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.systemFont(ofSize: 20)
+        navigationItem.titleView = titleLabel
         
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
     }

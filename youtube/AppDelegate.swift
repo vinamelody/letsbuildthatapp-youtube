@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
         
+        // make it red color but will still greyish ... set the translucent = false in viewcontroller
+        UINavigationBar.appearance().barTintColor = UIColor(red: 230/255, green: 32/255, blue: 31/255, alpha: 1)
+    
+        
         return true
     }
 
