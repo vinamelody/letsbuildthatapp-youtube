@@ -25,6 +25,20 @@ class HomeController: UICollectionViewController {
         navigationItem.titleView = titleLabel
         
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        setupMenuBar()
+    }
+    
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
+    func setupMenuBar() {
+        
+        view.addSubview(menuBar)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

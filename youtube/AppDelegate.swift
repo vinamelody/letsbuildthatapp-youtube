@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // make it red color but will still greyish ... set the translucent = false in viewcontroller
         UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
         
+        // remove the black line underneath navbar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
         
         // changing the status bar text to white. set the Info.plist item View Controller based to NO
         application.statusBarStyle = .lightContent
