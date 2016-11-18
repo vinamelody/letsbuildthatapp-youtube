@@ -66,5 +66,12 @@ extension MenuBar: UICollectionViewDelegateFlowLayout {
         return 0
     }
     
+}
+
+class MenuCell: BaseCell {
     
+    override func setupViews() {
+        super.setupViews()
+        
+    }
 }
