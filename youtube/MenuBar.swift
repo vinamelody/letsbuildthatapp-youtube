@@ -53,3 +53,18 @@ extension MenuBar: UICollectionViewDataSource, UICollectionViewDelegate {
         return cell
     }
 }
+
+extension MenuBar: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // this theoretically 1/4 but it will have some spacing in between, that's why we need the minimumInteritemSpacingForSectionAt below
+        return CGSize(width: frame.width / 4, height: frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    
+}
