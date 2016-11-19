@@ -112,7 +112,8 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
         
         // the + 16 is from the top g ap
         // + 68 is from the vertical constraints: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|" --> 8 + 44 + 16, ignore the 1
-        return CGSize(width: view.frame.width, height: height + 16 + 68)
+        // now it becomes 80, extra 12 due to extra padding for the gap added at HomeController
+        return CGSize(width: view.frame.width, height: height + 16 + 88)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

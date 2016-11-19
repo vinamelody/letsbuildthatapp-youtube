@@ -125,7 +125,8 @@ class VideoCell: BaseCell {
         addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
         
-        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
+        // this height links to HomeController > sizeForItemAt
+        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-36-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
         
         // this means, titleLabel is underneath of thumbnailImageView by 8 pixels.. and it's 20 px height
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
