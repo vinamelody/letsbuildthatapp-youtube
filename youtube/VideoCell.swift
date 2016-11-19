@@ -70,7 +70,7 @@ class VideoCell: BaseCell {
         return textView
     }()
     
-    func setupViews() {
+    override func setupViews() {
         addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(userProfileImageView)
