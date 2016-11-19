@@ -24,7 +24,7 @@ class MenuBar: UIView {
     
     let cellId = "cellId"
     
-    
+    let imageNames = ["home", "trending", "subscriptions", "account"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,7 +48,10 @@ extension MenuBar: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
+        
+        cell.imageView.image = UIImage(named: imageNames[indexPath.item])?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        cell.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
         
         return cell
     }
@@ -73,6 +76,7 @@ class MenuCell: BaseCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "home")
+        
         return iv
     }()
     
