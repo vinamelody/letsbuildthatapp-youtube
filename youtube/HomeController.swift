@@ -9,6 +9,15 @@
 import UIKit
 
 class HomeController: UICollectionViewController {
+    
+    var videos: [Video] = {
+        
+        var blankSpaceVideo = Video()
+        blankSpaceVideo.title = "Taylor Swift - Blank Space"
+        blankSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
+        return [blankSpaceVideo]
+        
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +42,7 @@ class HomeController: UICollectionViewController {
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         
         setupMenuBar()
+        setupNavBar()
     }
     
     let menuBar: MenuBar = {
@@ -47,12 +57,34 @@ class HomeController: UICollectionViewController {
         view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
     }
     
+    func setupNavBar() {
+        
+        let searchImage = UIImage(named: "search_icon")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
+        
+        let moreButton = UIBarButtonItem(image: UIImage(named: "nav_more_icon")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
+        
+        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
+    }
+    
+    func handleSearch() {
+        
+    }
+    
+    func handleMore() {
+        
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return videos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
+        
+        cell.video = videos[indexPath.item]
+        
         return cell
     }
 
