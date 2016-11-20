@@ -49,6 +49,7 @@ class VideoCell: BaseCell {
         imageView.image = UIImage(named: "taylor_swift_profile")
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -75,7 +76,11 @@ class VideoCell: BaseCell {
     var video: Video? {
         didSet {
             titleLabel.text = video?.title
-            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
+            
+            setupThumbnailImage()
+            setupProfileImage()
+            
+//            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
             
             if let profileImageName = video?.channel?.profileImageName {
                 userProfileImageView.image = UIImage(named: profileImageName)
@@ -109,6 +114,23 @@ class VideoCell: BaseCell {
     }
     
     var titleLabelHeightConstraint: NSLayoutConstraint?
+    
+    func setupThumbnailImage() {
+        
+        if let thumbnailImageUrl = video?.thumbnailImageName {
+            
+            thumbnailImageView.loadImageUsingUrlString(url: thumbnailImageUrl)
+            
+        }
+    }
+    
+    func setupProfileImage() {
+        
+        if let profileImageUrl = video?.channel?.profileImageName {
+            
+            userProfileImageView.loadImageUsingUrlString(url: profileImageUrl)
+        }
+    }
     
     override func setupViews() {
         addSubview(thumbnailImageView)

@@ -33,3 +33,26 @@ extension UIView {
         
     }
 }
+
+extension UIImageView {
+    
+    func loadImageUsingUrlString(url: String) {
+        
+        let url = URL(string: url)
+        
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            // without this dispatch, it will throw image error
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data!)
+            }
+            
+        }).resume()
+
+    }
+}
