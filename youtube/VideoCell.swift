@@ -58,6 +58,7 @@ class VideoCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Taylor Swift - Blank Space"
         label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
     
