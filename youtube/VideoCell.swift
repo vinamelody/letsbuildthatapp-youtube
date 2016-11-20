@@ -93,18 +93,13 @@ class VideoCell: BaseCell {
             // measure the titleText
             if let title = video?.title {
                 
-                print(title)
-                
                 // 16, 44 for image, 8 for image padding, 16 for right margin
                 let size = CGSize(width: frame.width - 16 - 44 - 8 - 16 , height: 1000)
-                print(size)
                 
                 let options = NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin)
                 let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 16)], context: nil)
-                print(estimatedRect)
                 
                 if estimatedRect.size.height > 20 {
-                    print("estimated height is not greater than 20")
                     titleLabelHeightConstraint?.constant = 44
                 } else {
                     titleLabelHeightConstraint?.constant = 20

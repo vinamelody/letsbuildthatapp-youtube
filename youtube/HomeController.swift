@@ -43,8 +43,14 @@ class HomeController: UICollectionViewController {
                 return
             }
             
-            let str = String(data: data!, encoding: String.Encoding.utf8)
-            print(str)
+            do {
+                // this would create the dictionary type for variable json
+                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+                print(json)
+                
+            } catch let jsonError {
+                print(jsonError)
+            }
             
         }.resume()
     }
