@@ -31,9 +31,28 @@ class HomeController: UICollectionViewController {
         return [blankSpaceVideo, badBloodVideo]
         
     }()
+    
+    func fetchVideos() {
+        
+        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
+        
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            let str = String(data: data!, encoding: String.Encoding.utf8)
+            print(str)
+            
+        }.resume()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchVideos()
         
         collectionView?.backgroundColor = UIColor.white
         navigationItem.title = "Home"
