@@ -50,7 +50,6 @@ class CustomImageView: UIImageView {
         
         if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
             self.image = imageFromCache
-            print("Image from cache")
             return
         }
         
@@ -68,7 +67,6 @@ class CustomImageView: UIImageView {
                 
                 if self.imageUrlString == urlString {
                     self.image = imageToCache
-                    print("Image from \(urlString) is still the same")
                 }
                 
                 imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)

@@ -78,12 +78,6 @@ class VideoCell: BaseCell {
             setupThumbnailImage()
             setupProfileImage()
             
-//            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
-            
-            if let profileImageName = video?.channel?.profileImageName {
-                userProfileImageView.image = UIImage(named: profileImageName)
-            }
-            
             if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews {
                 
                 let numberFormatter = NumberFormatter()
