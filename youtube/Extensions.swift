@@ -34,18 +34,23 @@ extension UIView {
     }
 }
 
-let imageCache = NSCache<AnyObject, AnyObject>()
+let imageCache: NSCache<AnyObject, AnyObject> = NSCache()
 
-extension UIImageView {
+class CustomImageView: UIImageView {
     
-    func loadImageUsingUrlString(url: String) {
+    var imageUrlString: String?
+    
+    func loadImageUsingUrlString(urlString: String) {
         
-        let url = URL(string: url)
+        imageUrlString = urlString
+        
+        let url = URL(string: urlString)
         
         image = nil
         
-        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
+        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
             self.image = imageFromCache
+            print("Image from cache")
             return
         }
         
@@ -60,8 +65,14 @@ extension UIImageView {
             DispatchQueue.main.async {
                 
                 let imageToCache = UIImage(data: data!)
-                imageCache.setObject(imageToCache!, forKey: url as AnyObject)
-                self.image = imageToCache
+                
+                if self.imageUrlString == urlString {
+                    self.image = imageToCache
+                    print("Image from \(urlString) is still the same")
+                }
+                
+                imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
+                
             }
             
         }).resume()

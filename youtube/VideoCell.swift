@@ -28,9 +28,8 @@ class BaseCell: UICollectionViewCell {
 
 class VideoCell: BaseCell {
     
-    let thumbnailImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.blue
+    let thumbnailImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.image = UIImage(named: "taylor_swift_blank_space")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -43,9 +42,8 @@ class VideoCell: BaseCell {
         return view
     }()
     
-    let userProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.green
+    let userProfileImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.image = UIImage(named: "taylor_swift_profile")
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
@@ -119,7 +117,7 @@ class VideoCell: BaseCell {
         
         if let thumbnailImageUrl = video?.thumbnailImageName {
             
-            thumbnailImageView.loadImageUsingUrlString(url: thumbnailImageUrl)
+            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
             
         }
     }
@@ -128,7 +126,7 @@ class VideoCell: BaseCell {
         
         if let profileImageUrl = video?.channel?.profileImageName {
             
-            userProfileImageView.loadImageUsingUrlString(url: profileImageUrl)
+            userProfileImageView.loadImageUsingUrlString(urlString: profileImageUrl)
         }
     }
     
