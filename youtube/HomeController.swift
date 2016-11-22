@@ -68,7 +68,10 @@ class HomeController: UICollectionViewController {
                     self.videos?.append(video)
                 }
                 
-                self.collectionView?.reloadData()
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+                
                 
             } catch let jsonError {
                 print(jsonError)
