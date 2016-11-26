@@ -142,6 +142,11 @@ class HomeController: UICollectionViewController {
             
             window.addSubview(blackView)
             blackView.frame = window.frame
+            blackView.alpha = 0
+            
+            UIView.animate(withDuration: 0.5, animations: { 
+                blackView.alpha = 1
+            })
         }
         
         
