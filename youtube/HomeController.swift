@@ -130,39 +130,18 @@ class HomeController: UICollectionViewController {
         navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
     }
     
+    let settingsLauncher = SettingsLauncher()
+    
     func handleSearch() {
         
     }
     
-    let blackView = UIView()
-    
     func handleMore() {
-        
-        if let window = UIApplication.shared.keyWindow {
-            
-            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            
-            blackView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
-            
-            window.addSubview(blackView)
-            blackView.frame = window.frame
-            blackView.alpha = 0
-            
-            UIView.animate(withDuration: 0.5, animations: { 
-                self.blackView.alpha = 1
-            })
-        }
-        
-        
-        
-    }
-    
+        settingsLauncher.showSettings()
+    }   
     
     func handleDismiss() {
-        
-        UIView.animate(withDuration: 0.5) { 
-            self.blackView.alpha = 0
-        }
+        settingsLauncher.handleDismiss()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
