@@ -132,13 +132,15 @@ class HomeController: UICollectionViewController {
     
     let settingsLauncher = SettingsLauncher()
     
+    func handleMore() {
+        settingsLauncher.showSettings()
+    }
+    
     func handleSearch() {
         
     }
     
-    func handleMore() {
-        settingsLauncher.showSettings()
-    }
+    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
