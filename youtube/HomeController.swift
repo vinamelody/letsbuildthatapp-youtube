@@ -136,6 +136,16 @@ class HomeController: UICollectionViewController {
     
     func handleMore() {
         
+        if let window = UIApplication.shared.keyWindow {
+            let blackView = UIView()
+            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            
+            window.addSubview(blackView)
+            blackView.frame = window.frame
+        }
+        
+        
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
