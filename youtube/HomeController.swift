@@ -134,23 +134,35 @@ class HomeController: UICollectionViewController {
         
     }
     
+    let blackView = UIView()
+    
     func handleMore() {
         
         if let window = UIApplication.shared.keyWindow {
-            let blackView = UIView()
+            
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            
+            blackView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             
             window.addSubview(blackView)
             blackView.frame = window.frame
             blackView.alpha = 0
             
             UIView.animate(withDuration: 0.5, animations: { 
-                blackView.alpha = 1
+                self.blackView.alpha = 1
             })
         }
         
         
         
+    }
+    
+    
+    func handleDismiss() {
+        
+        UIView.animate(withDuration: 0.5) { 
+            self.blackView.alpha = 0
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
