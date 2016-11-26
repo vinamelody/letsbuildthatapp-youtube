@@ -138,10 +138,6 @@ class HomeController: UICollectionViewController {
     
     func handleMore() {
         settingsLauncher.showSettings()
-    }   
-    
-    func handleDismiss() {
-        settingsLauncher.handleDismiss()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
