@@ -29,10 +29,12 @@ class SettingsCell: BaseCell {
         addSubview(nameLabel)
         addSubview(iconImageView)
         
-        addConstraintsWithFormat(format: "H:|-16-[v0(30)]-8-[v1]|", views: iconImageView, nameLabel)
+        addConstraintsWithFormat(format: "H:|-8-[v0(30)]-8-[v1]|", views: iconImageView, nameLabel)
         
         addConstraintsWithFormat(format: "V:|[v0]|", views: nameLabel)
-        addConstraintsWithFormat(format: "V:|[v0(30)]|", views: iconImageView)
+        addConstraintsWithFormat(format: "V:[v0(30)]", views: iconImageView)
+        
+        addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .centerY, relatedBy: .equal, toItem: nameLabel, attribute: .centerY, multiplier: 1, constant: 0))
         
     }
 }
