@@ -65,7 +65,7 @@ class SettingsLauncher: NSObject {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.register(SettingCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: cellId)
     }
     
 }
