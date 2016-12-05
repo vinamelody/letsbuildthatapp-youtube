@@ -57,8 +57,31 @@ class SettingsLauncher: NSObject {
         }
     }
     
+    let cellId = "cellId"
+    
     override init() {
         super.init()
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.register(SettingCell.self, forCellWithReuseIdentifier: cellId)
     }
+    
+}
+
+extension SettingsLauncher: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        return cell
+    }
+}
+
+extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
 }
