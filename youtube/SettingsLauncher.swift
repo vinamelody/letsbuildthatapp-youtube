@@ -59,6 +59,15 @@ class SettingsLauncher: NSObject {
     
     let cellId = "cellId"
     
+    let settings: [Setting] = {
+        return [Setting(name: "Settings", imageName: "settings"),
+                Setting(name: "Terms & privacy policy", imageName: "privacy"),
+                Setting(name: "Send feedback", imageName: "feedback"),
+                Setting(name: "Help", imageName: "help"),
+                Setting(name: "Switch account", imageName: "switch_account"),
+                Setting(name: "Cancel", imageName: "cancel")]
+    }()
+    
     override init() {
         super.init()
         
@@ -73,11 +82,13 @@ class SettingsLauncher: NSObject {
 extension SettingsLauncher: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return settings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SettingsCell
+        
+        cell.setting = settings[indexPath.item]
         return cell
     }
 }

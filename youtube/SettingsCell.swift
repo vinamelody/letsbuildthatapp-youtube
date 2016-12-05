@@ -8,11 +8,31 @@
 
 import UIKit
 
+class Setting: NSObject {
+    let name: String
+    let imageName: String
+    
+    init(name: String, imageName: String) {
+        self.name = name
+        self.imageName = imageName
+    }
+}
+
 class SettingsCell: BaseCell {
+    
+    var setting: Setting? {
+        didSet {
+            nameLabel.text = setting?.name
+            if let imageName = setting?.imageName {
+                iconImageView.image = UIImage(named: imageName)
+            }
+        }
+    }
     
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Settings"
+        label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
     
