@@ -21,6 +21,8 @@ class SettingsLauncher: NSObject {
     
     let cellHeight: CGFloat = 50
     
+    var homeController: HomeController?
+    
     func showSettings() {
         
         if let window = UIApplication.shared.keyWindow {
@@ -93,6 +95,26 @@ extension SettingsLauncher: UICollectionViewDataSource {
         cell.setting = settings[indexPath.item]
         return cell
     }
+    
+    private func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let setting = settings[indexPath.item]
+        print(setting.name)
+        
+        // here need to use completion block coz we want to hide first then push new vc
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
+            self.blackView.alpha = 0
+            if let window = UIApplication.shared.keyWindow {
+                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+            }
+            
+        }) { (complete: Bool) in
+            
+            self.homeController?.showControllerForSettings()
+                
+        }
+    }
 }
 
 extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -104,4 +126,6 @@ extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+    
 }

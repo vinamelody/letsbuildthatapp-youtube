@@ -136,6 +136,11 @@ class HomeController: UICollectionViewController {
         settingsLauncher.showSettings()
     }
     
+    func showControllerForSettings() {
+        let dummySettingsViewController = UIViewController()
+        navigationController?.pushViewController(dummySettingsViewController, animated: true)
+    }
+    
     func handleSearch() {
         
     }
