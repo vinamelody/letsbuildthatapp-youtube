@@ -97,8 +97,8 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let setting = settings[indexPath.item]
-        print(setting.name)
+        
+        
         
         // here need to use completion block coz we want to hide first then push new vc
         
@@ -110,8 +110,9 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
             }
             
         }) { (complete: Bool) in
+            let setting = self.settings[indexPath.item]
             
-            self.homeController?.showControllerForSettings()
+            self.homeController?.showControllerForSetting(setting: setting)
                 
         }
     }
