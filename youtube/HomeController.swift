@@ -130,7 +130,12 @@ class HomeController: UICollectionViewController {
         navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
     }
     
-    let settingsLauncher = SettingsLauncher()
+    // this will be nil
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
     
     func handleMore() {
         settingsLauncher.showSettings()

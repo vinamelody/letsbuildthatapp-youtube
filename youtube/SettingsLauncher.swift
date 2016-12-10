@@ -83,7 +83,7 @@ class SettingsLauncher: NSObject {
     
 }
 
-extension SettingsLauncher: UICollectionViewDataSource {
+extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return settings.count
@@ -96,7 +96,7 @@ extension SettingsLauncher: UICollectionViewDataSource {
         return cell
     }
     
-    private func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let setting = settings[indexPath.item]
         print(setting.name)
         
@@ -117,7 +117,7 @@ extension SettingsLauncher: UICollectionViewDataSource {
     }
 }
 
-extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension SettingsLauncher: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: cellHeight)
