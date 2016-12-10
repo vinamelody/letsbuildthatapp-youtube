@@ -50,12 +50,22 @@ class SettingsLauncher: NSObject {
         }
     }
     
-    func handleDismiss() {
+    func handleDismiss(setting: Setting) {
         
-        UIView.animate(withDuration: 0.5) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+            }
+            
+        }) { (complete: Bool) in
+            
+            // oh no, setting is actually a uitapgesture, see ep 9
+            if setting.name != "" && setting.name != "Cancel" {
+                
+                self.homeController?.showControllerForSetting(setting: setting)
             }
             
         }
@@ -98,26 +108,9 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
-        
         // here need to use completion block coz we want to hide first then push new vc
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            
-            self.blackView.alpha = 0
-            if let window = UIApplication.shared.keyWindow {
-                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
-            }
-            
-        }) { (complete: Bool) in
-            let setting = self.settings[indexPath.item]
-            
-            if setting.name != "Cancel" {
-            
-                self.homeController?.showControllerForSetting(setting: setting)
-            }
-            
-        }
+        handleDismiss(setting: settings[indexPath.item])
     }
 }
 
