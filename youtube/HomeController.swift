@@ -12,6 +12,8 @@ class HomeController: UICollectionViewController {
     
     var videos: [Video]?
     
+    let cellId = "cellId"
+    
     func fetchVideos() {
         ApiService.sharedInstance.fetchVideos {
             (videos: [Video]) in
@@ -27,7 +29,7 @@ class HomeController: UICollectionViewController {
         
         fetchVideos()
         
-        collectionView?.backgroundColor = UIColor.white
+        
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
         
@@ -38,14 +40,7 @@ class HomeController: UICollectionViewController {
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
         
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        
-        // bring this down a bit for the MenuBar..no auto complete for this
-        collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
-        
-        // for the scroll indicator on the right
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
-        
+        setupCollectionView()
         setupMenuBar()
         setupNavBar()
     }
@@ -54,6 +49,19 @@ class HomeController: UICollectionViewController {
         let mb = MenuBar()
         return mb
     }()
+    
+    func setupCollectionView() {
+        
+        collectionView?.backgroundColor = UIColor.white
+//        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        // bring this down a bit for the MenuBar..no auto complete for this
+        collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        
+        // for the scroll indicator on the right
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+    }
     
     func setupMenuBar() {
         
@@ -109,46 +117,52 @@ class HomeController: UICollectionViewController {
         
     }
     
-    
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return videos?.count ?? 0
-
-        // this 4 lines are similar to one line above
-//        if let count = videos?.count {
-//            return count
-//        }
-//        return 0
+        return 4
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-        
-        cell.video = videos?[indexPath.item]
-        
+        cell.backgroundColor = UIColor.blue
         return cell
     }
+    
+    
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return videos?.count ?? 0
+//    }
+//    
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
+//        cell.video = videos?[indexPath.item]
+//        
+//        return cell
+//    }
 
 }
 
 extension HomeController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        // estimate the total height of entire cell. but this alone will squeeze the thumbnail image, therefore we add with some numbers below
-        let height = (view.frame.width - 16 - 16) * 9 / 16
-        
-        // the + 16 is from the top g ap
-        // + 68 is from the vertical constraints: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|" --> 8 + 44 + 16, ignore the 1
-        // now it becomes 80, extra 12 due to extra padding for the gap added at HomeController
-        return CGSize(width: view.frame.width, height: height + 16 + 88)
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        // estimate the total height of entire cell. but this alone will squeeze the thumbnail image, therefore we add with some numbers below
+//        let height = (view.frame.width - 16 - 16) * 9 / 16
+//        
+//        // the + 16 is from the top g ap
+//        // + 68 is from the vertical constraints: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|" --> 8 + 44 + 16, ignore the 1
+//        // now it becomes 80, extra 12 due to extra padding for the gap added at HomeController
+//        return CGSize(width: view.frame.width, height: height + 16 + 88)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
 }
 
 
