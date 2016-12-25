@@ -115,9 +115,22 @@ class HomeController: UICollectionViewController {
     
     func setupMenuBar() {
         
+        navigationController?.hidesBarsOnSwipe = true
+        
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        view.addSubview(redView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)
+        
         view.addSubview(menuBar)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+        
+        // Removed the pipe for top
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+        
+        // Pin the menuBar below the status bar, but there will be gap between the sliding thus we create the redView
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
     func setupNavBar() {
