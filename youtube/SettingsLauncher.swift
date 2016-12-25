@@ -8,6 +8,25 @@
 
 import UIKit
 
+class Setting: NSObject {
+    let name: SettingName
+    let imageName: String
+    
+    init(name: SettingName, imageName: String) {
+        self.name = name
+        self.imageName = imageName
+    }
+}
+
+enum SettingName: String {
+    case cancel = "Cancel"
+    case settings = "Settings"
+    case termsPrivacy = "Terms & privacy policy"
+    case sendFeedback = "Send Feedback"
+    case help = "Help"
+    case switchAccount = "Switch Account"
+}
+
 class SettingsLauncher: NSObject {
     
     let blackView = UIView()
@@ -63,7 +82,7 @@ class SettingsLauncher: NSObject {
         }) { (complete: Bool) in
             
             // oh no, setting is actually a uitapgesture, see ep 9
-            if setting.name != "" && setting.name != "Cancel" {
+            if setting.name != .cancel {
                 
                 self.homeController?.showControllerForSetting(setting: setting)
             }
@@ -74,12 +93,13 @@ class SettingsLauncher: NSObject {
     let cellId = "cellId"
     
     let settings: [Setting] = {
-        return [Setting(name: "Settings", imageName: "settings"),
-                Setting(name: "Terms & privacy policy", imageName: "privacy"),
-                Setting(name: "Send feedback", imageName: "feedback"),
-                Setting(name: "Help", imageName: "help"),
-                Setting(name: "Switch account", imageName: "switch_account"),
-                Setting(name: "Cancel", imageName: "cancel")]
+        let cancelSetting = Setting(name: .cancel, imageName: "cancel")
+        return [Setting(name: .settings, imageName: "settings"),
+                Setting(name: .termsPrivacy, imageName: "privacy"),
+                Setting(name: .sendFeedback, imageName: "feedback"),
+                Setting(name: .help, imageName: "help"),
+                Setting(name: .switchAccount, imageName: "switch_account"),
+                cancelSetting]
     }()
     
     override init() {

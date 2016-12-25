@@ -8,15 +8,7 @@
 
 import UIKit
 
-class Setting: NSObject {
-    let name: String
-    let imageName: String
-    
-    init(name: String, imageName: String) {
-        self.name = name
-        self.imageName = imageName
-    }
-}
+
 
 class SettingsCell: BaseCell {
     
@@ -31,7 +23,7 @@ class SettingsCell: BaseCell {
     
     var setting: Setting? {
         didSet {
-            nameLabel.text = setting?.name
+            nameLabel.text = setting?.name.rawValue
             if let imageName = setting?.imageName {
                 iconImageView.image = UIImage(named: imageName)?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                 iconImageView.tintColor = UIColor.darkGray
