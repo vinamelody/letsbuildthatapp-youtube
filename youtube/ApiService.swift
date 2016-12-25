@@ -13,7 +13,7 @@ class ApiService: NSObject {
     
     static let sharedInstance = ApiService()
     
-    func fetchVideos() {
+    func fetchVideos(completion: @escaping ([Video]) -> ()) {
         
         let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
         
@@ -28,7 +28,7 @@ class ApiService: NSObject {
                 // this would create the dictionary type for variable json
                 let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
                 
-                self.videos = [Video]()
+                var videos = [Video]()
                 
                 for dictionary in json as! [[String: AnyObject]] {
                     
@@ -44,11 +44,11 @@ class ApiService: NSObject {
                     
                     video.channel = channel
                     
-                    self.videos?.append(video)
+                    videos.append(video)
                 }
                 
                 DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
+                    completion(videos)
                 }
                 
                 

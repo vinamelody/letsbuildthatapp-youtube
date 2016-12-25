@@ -13,7 +13,12 @@ class HomeController: UICollectionViewController {
     var videos: [Video]?
     
     func fetchVideos() {
-        
+        ApiService.sharedInstance.fetchVideos {
+            (videos: [Video]) in
+            
+            self.videos = videos
+            self.collectionView?.reloadData()
+        }
         
     }
 
