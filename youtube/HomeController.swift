@@ -54,6 +54,9 @@ class HomeController: UICollectionViewController {
         
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
+            
+            // decreasing the gap between cell
+            flowLayout.minimumLineSpacing = 0
         }
         
         collectionView?.backgroundColor = UIColor.white
@@ -65,6 +68,9 @@ class HomeController: UICollectionViewController {
         
         // for the scroll indicator on the right
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        
+        // activate snapping behavior
+        collectionView?.isPagingEnabled = true
     }
     
     func setupMenuBar() {
@@ -128,7 +134,8 @@ class HomeController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
-        cell.backgroundColor = UIColor.blue
+        let colors: [UIColor] = [.blue, .green, .gray, .purple]
+        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
     
