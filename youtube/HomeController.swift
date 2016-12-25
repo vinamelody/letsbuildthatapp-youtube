@@ -52,6 +52,10 @@ class HomeController: UICollectionViewController {
     
     func setupCollectionView() {
         
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+        }
+        
         collectionView?.backgroundColor = UIColor.white
 //        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)

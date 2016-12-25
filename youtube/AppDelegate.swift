@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+//        layout.scrollDirection = .horizontal
         
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
         
