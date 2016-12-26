@@ -130,6 +130,8 @@ class HomeController: UICollectionViewController {
     
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
+        
+        // vina note: original video says at is .none but in swift 3, i think it's .centeredHorizontally
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
 //        collectionView?.scrollToItem(at: <#T##IndexPath#>, at: <#T##UICollectionViewScrollPosition#>, animated: <#T##Bool#>)
         
@@ -138,6 +140,21 @@ class HomeController: UICollectionViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        // vina note: original video has targetContentOffset.memory.x
+//        print(targetContentOffset.pointee.x)
+        
+        // so then by using this, we can get the index path
+        print(targetContentOffset.pointee.x / view.frame.width)
+        
+        let index = targetContentOffset.pointee.x / view.frame.width
+        
+        let indexPath = IndexPath(item: Int(index), section: 0)
+        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
