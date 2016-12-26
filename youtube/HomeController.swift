@@ -62,7 +62,8 @@ class HomeController: UICollectionViewController {
         
         collectionView?.backgroundColor = UIColor.white
 //        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+//        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         
         // bring this down a bit for the MenuBar..no auto complete for this
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -164,8 +165,6 @@ class HomeController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
-        let colors: [UIColor] = [.blue, .green, .gray, .purple]
-        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
     

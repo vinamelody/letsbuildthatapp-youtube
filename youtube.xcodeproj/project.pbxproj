@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5A233F561DDF40C100E03957 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A233F551DDF40C100E03957 /* MenuBar.swift */; };
 		5A82F5721E0FFD1500021120 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82F5711E0FFD1400021120 /* ApiService.swift */; };
+		5A9304271E10F8C900F9B3AF /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9304261E10F8C900F9B3AF /* FeedCell.swift */; };
 		5AA0CAD81DD89702000E0931 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA0CAD71DD89702000E0931 /* Extensions.swift */; };
 		5AA0CADB1DD897BE000E0931 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA0CADA1DD897BE000E0931 /* VideoCell.swift */; };
 		5AB088AC1DF59FC1007B292E /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB088AB1DF59FC1007B292E /* SettingsCell.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		5A233F551DDF40C100E03957 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		5A82F5711E0FFD1400021120 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		5A9304261E10F8C900F9B3AF /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		5AA0CAD71DD89702000E0931 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5AA0CADA1DD897BE000E0931 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		5AB088AB1DF59FC1007B292E /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -66,8 +68,10 @@
 		5AA0CAD91DD8979E000E0931 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5AB088AB1DF59FC1007B292E /* SettingsCell.swift */,
 				5AA0CADA1DD897BE000E0931 /* VideoCell.swift */,
 				5A233F551DDF40C100E03957 /* MenuBar.swift */,
+				5A9304261E10F8C900F9B3AF /* FeedCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -77,7 +81,6 @@
 			children = (
 				5AEED8351DD6B1FC00ED1F2C /* HomeController.swift */,
 				5AD13ED51DE96EDA00A28B31 /* SettingsLauncher.swift */,
-				5AB088AB1DF59FC1007B292E /* SettingsCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AA0CADB1DD897BE000E0931 /* VideoCell.swift in Sources */,
+				5A9304271E10F8C900F9B3AF /* FeedCell.swift in Sources */,
 				5AF189141DE09CC6003197A0 /* Video.swift in Sources */,
 				5AB088AC1DF59FC1007B292E /* SettingsCell.swift in Sources */,
 				5AEED8361DD6B1FC00ED1F2C /* HomeController.swift in Sources */,
