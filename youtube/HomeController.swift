@@ -11,7 +11,7 @@ import UIKit
 class HomeController: UICollectionViewController {
     
     let cellId = "cellId"
-    
+    let titles = ["Home", "Trending", "Subscriptions", "Account"]
     
 
     override func viewDidLoad() {
@@ -123,17 +123,20 @@ class HomeController: UICollectionViewController {
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
 //        collectionView?.scrollToItem(at: <#T##IndexPath#>, at: <#T##UICollectionViewScrollPosition#>, animated: <#T##Bool#>)
         
+        setTitleForMenuIndex(index: menuIndex)
+
+    }
+    
+    private func setTitleForMenuIndex(index: Int) {
+        
         if let titleLabel = navigationItem.titleView as? UILabel {
             titleLabel.text = "  \(titles[Int(index)])"
         }
-
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
     }
-    
-    let titles = ["Home", "Tredning", "Subscriptions", "Account"]
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
@@ -148,10 +151,7 @@ class HomeController: UICollectionViewController {
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         
-        if let titleLabel = navigationItem.titleView as? UILabel {
-            titleLabel.text = "  \(titles[Int(index)])"
-        }
-        
+        setTitleForMenuIndex(index: Int(index))
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -162,9 +162,7 @@ class HomeController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
         return cell
-    }
-    
-    
+    }   
 
 }
 
