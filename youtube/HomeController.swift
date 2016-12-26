@@ -10,25 +10,12 @@ import UIKit
 
 class HomeController: UICollectionViewController {
     
-    var videos: [Video]?
-    
     let cellId = "cellId"
     
-    func fetchVideos() {
-        ApiService.sharedInstance.fetchVideos {
-            (videos: [Video]) in
-            
-            self.videos = videos
-            self.collectionView?.reloadData()
-        }
-        
-    }
+    
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        fetchVideos()
-        
+        super.viewDidLoad()       
         
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
@@ -169,17 +156,6 @@ class HomeController: UICollectionViewController {
     }
     
     
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return videos?.count ?? 0
-//    }
-//    
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-//        cell.video = videos?[indexPath.item]
-//        
-//        return cell
-//    }
 
 }
 
@@ -189,20 +165,7 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        
-//        // estimate the total height of entire cell. but this alone will squeeze the thumbnail image, therefore we add with some numbers below
-//        let height = (view.frame.width - 16 - 16) * 9 / 16
-//        
-//        // the + 16 is from the top g ap
-//        // + 68 is from the vertical constraints: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|" --> 8 + 44 + 16, ignore the 1
-//        // now it becomes 80, extra 12 due to extra padding for the gap added at HomeController
-//        return CGSize(width: view.frame.width, height: height + 16 + 88)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
+
 }
 
 
