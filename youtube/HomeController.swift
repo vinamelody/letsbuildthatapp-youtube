@@ -162,7 +162,7 @@ class HomeController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
         return cell
-    }   
+    }
 
 }
 
