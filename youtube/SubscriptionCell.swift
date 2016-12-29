@@ -1,5 +1,5 @@
 //
-//  TrendingCell.swift
+//  SubscriptionCell.swift
 //  youtube
 //
 //  Created by Vina Melody on 29/12/16.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-class TrendingCell: FeedCell {
+class SubscriptionCell: FeedCell {
 
     override func fetchVideos() {
-        ApiService.sharedInstance.fetchTrendingFeed() {
+        ApiService.sharedInstance.fetchSubscriptionFeed() {
             (videos: [Video]) in
             
             self.videos = videos
             self.collectionView.reloadData()
         }
-
+        
         
     }
 
