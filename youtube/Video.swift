@@ -17,6 +17,16 @@ class Video: NSObject {
     var duration: NSNumber?
     
     var channel: Channel?
+    
+    override func setValue(_ value: Any?, forKey key: String) {
+        if key == "channel" {
+            self.channel = Channel()
+            self.channel?.setValuesForKeys(value as! [String: AnyObject])
+        } else {
+            super.setValue(value, forKey: key)
+        }
+        
+    }
 }
 
 class Channel: NSObject {
