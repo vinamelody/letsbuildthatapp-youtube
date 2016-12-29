@@ -36,10 +36,10 @@ class ApiService: NSObject {
 //                    }
                     
                     // 4 lines above are the same as this. see explanation in episode 15
-                    let videos = jsonDictionaries.map({return Video(dictionary: $0)})
+//                    let videos = jsonDictionaries.map({return Video(dictionary: $0)})
                     
                     DispatchQueue.main.async {
-                        completion(videos)
+                        completion(jsonDictionaries.map({return Video(dictionary: $0)}))
                     }
                 }
                 
