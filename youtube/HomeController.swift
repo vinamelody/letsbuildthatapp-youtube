@@ -11,6 +11,7 @@ import UIKit
 class HomeController: UICollectionViewController {
     
     let cellId = "cellId"
+    let trendingCellId = "trendingCellId"
     let titles = ["Home", "Trending", "Subscriptions", "Account"]
     
 
@@ -51,6 +52,7 @@ class HomeController: UICollectionViewController {
 //        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
 //        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
         
         // bring this down a bit for the MenuBar..no auto complete for this
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -159,6 +161,11 @@ class HomeController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.item == 1 {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: trendingCellId, for: indexPath)
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
         return cell
