@@ -31,8 +31,7 @@ class ApiService: NSObject {
                 var videos = [Video]()
                 
                 for dictionary in json as! [[String: AnyObject]] {
-                    let video = Video()
-                    video.setValuesForKeys(dictionary)
+                    let video = Video(dictionary: dictionary)
                     videos.append(video)
                 }
                 

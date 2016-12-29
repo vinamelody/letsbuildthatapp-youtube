@@ -27,6 +27,11 @@ class Video: NSObject {
         }
         
     }
+    
+    init(dictionary: [String: AnyObject]) {
+        super.init()
+        setValuesForKeys(dictionary)
+    }
 }
 
 class Channel: NSObject {
