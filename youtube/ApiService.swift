@@ -25,20 +25,23 @@ class ApiService: NSObject {
             }
             
             do {
-                // this would create the dictionary type for variable json
-                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
                 
-                var videos = [Video]()
-                
-                for dictionary in json as! [[String: AnyObject]] {
-                    let video = Video(dictionary: dictionary)
-                    videos.append(video)
+                if let unwrappedData = data {
+                    if let jsonDictionaries = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.mutableContainers) as? [[String: AnyObject]] {
+                        var videos = [Video]()
+                        
+                        for dictionary in jsonDictionaries {
+                            let video = Video(dictionary: dictionary)
+                            videos.append(video)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(videos)
+                        }
+                    }
+                    
+                    
                 }
-                
-                DispatchQueue.main.async {
-                    completion(videos)
-                }
-                
                 
             } catch let jsonError {
                 print(jsonError)
