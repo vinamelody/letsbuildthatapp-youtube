@@ -8,7 +8,29 @@
 
 import UIKit
 
-class Video: NSObject {
+class SafeJsonObject: NSObject {
+    
+    override func setValue(_ value: Any?, forKey key: String) {
+        
+        // Preventing crash if json keys not matching. See explanation in eps 15
+        let uppercasedFirstCharacter = String(key.characters.first!).uppercased()
+        
+        let range = key.startIndex..<key.characters.index(key.startIndex, offsetBy: 1)
+        
+        let selectorString = key.replacingCharacters(in: range, with: uppercasedFirstCharacter)
+        
+        let selector = NSSelectorFromString("set\(selectorString):")
+        let responds = self.responds(to: selector)
+        
+        if !responds {
+            return
+        }
+        
+        super.setValue(value, forKey: key)
+    }
+}
+
+class Video: SafeJsonObject {
     
     var thumbnail_image_name: String?
     var title: String?
@@ -19,6 +41,7 @@ class Video: NSObject {
     var channel: Channel?
     
     override func setValue(_ value: Any?, forKey key: String) {
+        
         if key == "channel" {
             self.channel = Channel()
             self.channel?.setValuesForKeys(value as! [String: AnyObject])
@@ -34,7 +57,7 @@ class Video: NSObject {
     }
 }
 
-class Channel: NSObject {
+class Channel: SafeJsonObject {
     
     var name: String?
     var profile_image_name: String?
