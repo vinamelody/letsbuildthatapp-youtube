@@ -137,6 +137,17 @@ class VideoPlayerView: UIView {
             
             // Because the default of isPlaying is false, need to set to true here
             isPlaying = true
+            
+            if let duration = player?.currentItem?.duration {
+                let seconds = CMTimeGetSeconds(duration)
+                
+                let secondsText = Int(seconds) % 60
+                let minutesText = String(format: "%2d", Int(seconds) / 60)
+                
+                videoLengthLabel.text = "\(minutesText):\(secondsText)"
+            }
+            
+            
         }
     }
     
