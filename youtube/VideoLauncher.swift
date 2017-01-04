@@ -34,12 +34,14 @@ class VideoPlayerView: UIView {
         return label
     }()
     
-    let videoSlider: UISlider = {
+    lazy var videoSlider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumTrackTintColor = .red
         slider.setThumbImage(UIImage(named:"thumb"), for: .normal)
         slider.maximumTrackTintColor = .white
+        
+        slider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
         return slider
     }()
     
@@ -54,6 +56,24 @@ class VideoPlayerView: UIView {
         button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
         return button
     }()
+    
+    func handleSliderChange() {
+        
+        if let duration = player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            
+            let value = Float64(videoSlider.value) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            
+            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+                
+            })
+        }
+        
+        
+        
+        
+    }
     
     var isPlaying = false
     
